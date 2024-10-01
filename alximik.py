@@ -45,3 +45,32 @@ Half3 = Half - Half2
 print(Half3)
 game = True
 potions = {}
+while game:
+    potion= input(f'What potion do you want to make? q- for quality, n- for non quality').lower()
+    if potion == 'exit':
+        game = False
+    else:
+        potion_name = input('Enter potion name: ')
+        potion_quality = randint(1, 100)
+        if potion == 'q':
+            new_potion = QualityPotion(potion_name, potion_quality)
+        else:
+            new_potion = NotQualityPotion(potion_name, potion_quality)
+        potions[potion_name] = new_potion
+        if len(potions)>=2:
+            action = input(f'Add(+) or Subject(-) your potions? ').lower()
+            potion1 = potions.popitem()[1]
+            potion2 = potions.popitem()[1]
+            if action == '+':
+                mixed_potion = potion1 + potion2
+            else:
+                mixed_potion = potion1 - potion2
+                print('Start mixing potios...')
+                if mixed_potion.get_quality() < 30:
+                    print('Kaboom! Potion exploded!')
+                    game = False
+                else:
+                    potions[mixed_potion.get_name()] = mixed_potion
+                    print(f'Your potion name: {mixed_potion.get_name()}')
+                    print(f'Potion quality: {mixed_potion.get_quality()}, Be careful next time!')
+        
