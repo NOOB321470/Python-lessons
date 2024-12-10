@@ -45,7 +45,7 @@ class Board(Tk):
             text = f'Winner: {player}'
         else:
             text = 'Draw'
-        self.canvas.create_text(center, center, text = text, fill = 'white', font = 'Arial 50')
+        self.canvas.create_text(center, center, text = text, fill = 'white', font = 'Arial 40')
 
     def click_event(self, event):
         x_coord = event.x // FIGURE_SIZE
@@ -57,6 +57,19 @@ class Board(Tk):
 
         if self.board[x][y] == EMPTY:
             self.update_board(x, y)
+            self.change_player()
+
+            if current_player == X:
+                self.render_cross(position[x], position[y])
+            elif current_player == O:
+                self.render_circle(position[x], position[y])
+        print(self.board)
+    def change_player(self):
+        if self.current_player == X:
+            self.current_player=O
+        else:
+            self.current_player = X
+            
 
     def update_board(self, x, y):
         c_player = self.current_player
@@ -70,10 +83,20 @@ class Board(Tk):
         for y in range(3):
             if board[y] == [player, player, player]:
                 return True
-        for y in range(3):
-#            if board[y] == [player]:
-                print(self.check_win)
+        for x in range(3):
+            if board [0] [x] == board [1] [x]== board [2] [x] == player:
                 return True
+        if board [0][0] == board[1][1] == board[2][2] == player:
+            return True 
+        elif board[0][2] == board[1][1] == board[2][0] == player:
+            return True
+        return False
+    def check_draw(self, board):
+        for row in board:
+            if EMPTY in row:
+                return False
+        return True
+    print(check_draw)
                 
 
 
