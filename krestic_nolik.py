@@ -46,6 +46,7 @@ class Board(Tk):
         else:
             text = 'Draw'
         self.canvas.create_text(center, center, text = text, fill = 'white', font = 'Arial 40')
+        self.canvas.unbind('<Button-1>')
 
     def click_event(self, event):
         x_coord = event.x // FIGURE_SIZE
@@ -73,11 +74,12 @@ class Board(Tk):
 
     def update_board(self, x, y):
         c_player = self.current_player
+        draw = self.check_draw
         self.board[x][y] = c_player
         if self.check_win(self.board, c_player):
             self.winner(c_player)
-#        elif self.check_draw(self.board):
- #           self.winner()
+        if self.check_draw(self.board):
+            self.winner(player= None)
         
     def check_win(self, board, player):
         for y in range(3):
@@ -95,7 +97,9 @@ class Board(Tk):
         for row in board:
             if EMPTY in row:
                 return False
+            print(row)
         return True
+
     print(check_draw)
                 
 
