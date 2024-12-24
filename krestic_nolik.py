@@ -49,22 +49,24 @@ class Board(Tk):
         self.canvas.unbind('<Button-1>')
 
     def click_event(self, event):
+        print(event.x)
         x_coord = event.x // FIGURE_SIZE
         y_coord = event.y // FIGURE_SIZE
         self.make_move(x_coord, y_coord)
+
     def make_move(self, x, y):
+        print(self.board)
+        print(x, y, EMPTY)
         position = {0: 0, 1: 200, 2: 400}
         current_player = self.current_player
-
         if self.board[x][y] == EMPTY:
             self.update_board(x, y)
             self.change_player()
-
             if current_player == X:
                 self.render_cross(position[x], position[y])
             elif current_player == O:
                 self.render_circle(position[x], position[y])
-        print(self.board)
+       # print(self.board)
     def change_player(self):
         if self.current_player == X:
             self.current_player=O
@@ -78,7 +80,7 @@ class Board(Tk):
         self.board[x][y] = c_player
         if self.check_win(self.board, c_player):
             self.winner(c_player)
-        if self.check_draw(self.board):
+        elif self.check_draw(self.board): #убрать 2-ой if(чтобы функция  winner вызывалась только 1 раз.)
             self.winner(player= None)
         
     def check_win(self, board, player):
@@ -97,10 +99,10 @@ class Board(Tk):
         for row in board:
             if EMPTY in row:
                 return False
-            print(row)
+           # print(row)
         return True
 
-    print(check_draw)
+    #print(check_draw)
                 
 
 
