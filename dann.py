@@ -131,4 +131,57 @@ print(no_spaces)
 to_list = my_string.split()# разделяет строку по заданному ему знаку 
 print(to_list)
 
+first_string = 'Hello world'
+second_string = 'Display beautifully'
 
+collection = [first_string, second_string]
+
+for s in collection:
+    print(s.ljust(20, '#'))# Делает так чтобы у двух строк было одинаковое кол-во текста недостающие заменяет вторым вводом
+
+some_data = [("banana", 5), ("potato", 2), ("tomato", 15)]
+
+for veg, price in some_data:
+    print(f"name: {veg:<10} price:{price:03d} $")
+
+from datetime import datetime
+today = "Today's date is {:%Y-%M-%D %h:%m}". format(datetime.now())
+print(today)
+
+my_string = 'Hello world!'
+
+my_string.startswith('Hello')# проверяет есть ли в начале строки ввод и выводит булев тип
+my_string.endswith('world!')# тоже самое только в конце
+
+# colorama меняет цвет текста 
+
+replaced = my_string.replace('Hello', 'Bye bye')# меняет местами строки
+print(replaced)
+
+some_iterable = ['a', 'b', 'c']
+
+my_string = ''.join(some_iterable)# делает из коллекции строку
+print(my_string)
+
+unsorted_list = [(10, -1), (5, 12), (-5, 2)]
+
+sorted_list = sorted(unsorted_list, key=lambda x: x[0])
+print(sorted_list)
+
+sorted_list = sorted(unsorted_list, key=lambda x: x[1])# lambda однострочная безымянная функция которая принимает и возвращает значение
+print(sorted_list)
+
+convert_list = list(map(lambda x: int(x), my_list))
+print(convert_list)
+
+filter_list = list(filter(lambda x: type(x) is str, my_list))# filter применяет функцию к каждому элементу делимого объекта и если правда оставляет элемент иначе игнор
+print(filter_list)
+
+from functools import reduce
+my_list = [1,2,3,4,5]
+reduced_list = reduce(lambda x, y: x+y, my_list)# берёт два числа и что-то с ними делает
+print(reduced_list)
+
+
+only_evens = [i ** 2 for i in range(10) if i ** 2 % 2 == 0]# однострочный if else
+print(only_evens)
