@@ -185,3 +185,88 @@ print(reduced_list)
 
 only_evens = [i ** 2 for i in range(10) if i ** 2 % 2 == 0]# однострочный if else
 print(only_evens)
+
+some_value = False
+my_ternary = 10 if some_value else 20# тернарный оператор
+
+print(my_ternary)
+
+def my_func(a, b, c):
+    print(a, b, c)
+
+my_func('Hello', 'World', '!!!')#Позиционная постановка аргументов в функции 
+
+my_func(a='First', b='second', c='Third')# Именнованная постановка аргументов в функции
+my_func(b='Second', c='Third', a='First')
+
+my_func('First', b='Second', c='Third')# Комбинированная постановка аргументов (сначала позиционнное, потом именное)
+
+def my_func(a, b, *args, **kwargs):# ** упаковывает в словарь * упаковывает в кортеж
+    print(a, b)
+    print(args)
+    print(kwargs)
+
+my_func(1,2, 3,4,5, foo=6, bar=7)
+
+def my_func(a, b, c):
+    print(a, b, c)
+
+some_dict = {'a':1, 'b':2, 'c':3}
+my_func(**some_dict)#** распаковывает словарь * кортеж
+
+def decorator(func):
+    def wrapper():
+        print('Before')
+        func()
+        print('After')
+    return wrapper
+
+@decorator# 
+def print_name():
+    print('Mike')
+
+print_name()
+
+def square_decorator(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result *result
+    return wrapper
+
+@square_decorator
+def add_some(x):
+    return x + 5
+
+print(add_some(10))
+
+def repeater(times):
+    def decorator_repeat(func):
+        def wrapper(*args, **kwargs):
+            for _ in range(times):
+                result = func(*args, **kwargs)
+            return result
+        return wrapper
+    return decorator_repeat
+
+@repeater(times=7)
+def say_hello():
+    print('Hello World!')
+
+say_hello()
+
+def check_permission(func):
+    def wrapper(*args, **kwargs):
+        arguments= args[0]
+        user = args[1]
+        if user == 'admin':
+            return func(arguments, user)
+        else:
+            return 'Denied'
+    return wrapper
+
+@check_permission
+def extraordinary_function(arguments, user):
+    return arguments + 10 if user else arguments - 10
+
+user = 'admin'
+print(extraordinary_function(15, user))
