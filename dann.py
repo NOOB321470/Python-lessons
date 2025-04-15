@@ -270,3 +270,40 @@ def extraordinary_function(arguments, user):
 
 user = 'admin'
 print(extraordinary_function(15, user))
+
+times= 0
+def dec(times):
+    def pr(*args, **kwargs):
+        global times
+        times+=1
+        print('This function called: {times} times')
+        pr = times(*args, **kwargs)
+        return pr
+@dec
+def func():
+    print('Hello')
+
+def counter(func):
+    def wrapper(*args, **kwargs):
+        func.__dict__['count'] +=1
+        print(f"This function callled: {func.__dict__['count']} times")
+        result = func(*args, **kwargs)
+        return result
+    func.__dict__['count'] = 0
+    return wrapper
+@counter
+def func():
+    print('Hello')
+func()
+from collections import Counter
+
+my_string = 'aaaabbccccdddd'
+
+my_counter = Counter(my_string)
+print(my_counter)
+
+my_list = ['banan', 'slon', 7]
+for i in enumerate(my_list):# узнает индексы составляющих списка
+    print(i[0], i[1])
+#yield = return но его можно юзать много раз
+#next переходит от одного yield к другому
