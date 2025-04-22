@@ -1,3 +1,4 @@
+
 my_list = []
 
 my_list = list()
@@ -307,3 +308,11 @@ for i in enumerate(my_list):# узнает индексы составляющи
     print(i[0], i[1])
 #yield = return но его можно юзать много раз
 #next переходит от одного yield к другому
+# генератор это 
+# walurus что там
+import json
+
+my_dict = {"class": "Mage", "level": 5, "items": ["sword", "potion"]}
+
+to_json = json.dumps(my_dict, indent=4)#indent добавляет отступы в json
+print(to_json)
